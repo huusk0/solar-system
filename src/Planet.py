@@ -1,5 +1,5 @@
 import math
-from Sun import Sun
+from .Sun import Sun
 
 
 class Planet:

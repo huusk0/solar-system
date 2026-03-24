@@ -1,5 +1,5 @@
-from Planet import Planet
-from Sun import Sun
+from .Planet import Planet
+from .Sun import Sun
 import math
 
 SCALE = 0.1
