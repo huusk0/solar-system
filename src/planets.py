@@ -2,7 +2,7 @@ from .Planet import Planet
 from .Sun import Sun
 import math
 
-SCALE = 0.1
+SPEED_SCALE = 0.05
 G = 1
 M = 1000
 
@@ -17,9 +17,9 @@ planets = [
         mass=10,
         coords=(200, sun.coords[1] - merkurius_distance),
         star=sun,
-        velocity=(math.sqrt(G * M * SCALE / (merkurius_distance)), 0),
+        velocity=(math.sqrt(G * M * SPEED_SCALE / (merkurius_distance)), 0),
         id="Mercury",
-        scale=SCALE,
+        speed_scale=SPEED_SCALE,
         G=G,
         color=(100, 100, 100),
     ),
@@ -27,9 +27,9 @@ planets = [
         mass=8.15,  # Relative to Mercury's mass scale
         coords=(200, int(sun.coords[1] - venus_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SCALE / venus_dist), 0),
+        velocity=(math.sqrt(G * M * SPEED_SCALE / venus_dist), 0),
         id="Venus",
-        scale=SCALE,
+        speed_scale=SPEED_SCALE,
         G=G,
         color=(255, 198, 73),
     ),
@@ -37,9 +37,9 @@ planets = [
         mass=10.0,
         coords=(200, int(sun.coords[1] - earth_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SCALE / earth_dist), 0),
+        velocity=(math.sqrt(G * M * SPEED_SCALE / earth_dist), 0),
         id="Earth",
-        scale=SCALE,
+        speed_scale=SPEED_SCALE,
         G=G,
         color=(100, 149, 237),
     ),
@@ -47,9 +47,9 @@ planets = [
         mass=1.07,
         coords=(200, int(sun.coords[1] - mars_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SCALE / mars_dist), 0),
+        velocity=(math.sqrt(G * M * SPEED_SCALE / mars_dist), 0),
         id="Mars",
-        scale=SCALE,
+        speed_scale=SPEED_SCALE,
         G=G,
         color=(193, 68, 14),
     ),
