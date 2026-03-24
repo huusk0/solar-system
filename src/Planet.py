@@ -5,7 +5,7 @@ from Sun import Sun
 class Planet:
     def __init__(
         self,
-        mass: int | None,
+        mass: float | None,
         coords: tuple[int, int],
         star: Sun,
         velocity: tuple[float, float],
