@@ -12,6 +12,7 @@ class Planet:
         id: str | int,
         scale: float,
         G: int,
+        color: tuple[int, int, int] = (0, 255, 0),
     ):
         self.mass = mass
         self.coords = coords
@@ -21,6 +22,7 @@ class Planet:
         self.closest_neighbor_counts: dict[Planet, int] = {}
         self.scale = scale
         self.G = G
+        self.color = color
 
     def __repr__(self) -> str:
         return f"Planet {self.id}"
