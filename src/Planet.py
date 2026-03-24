@@ -10,7 +10,7 @@ class Planet:
         star: Sun,
         velocity: tuple[float, float],
         id: str | int,
-        scale: float,
+        speed_scale: float,
         G: int,
         color: tuple[int, int, int] = (0, 255, 0),
     ):
@@ -20,7 +20,7 @@ class Planet:
         self.velocity = velocity
         self.id = id
         self.closest_neighbor_counts: dict[Planet, int] = {}
-        self.scale = scale
+        self.speed_scale = speed_scale
         self.G = G
         self.color = color
 
@@ -65,7 +65,7 @@ class Planet:
         theta = math.atan2(dy, dx)
 
         # Gravity formula: GM / R^2
-        accel = (self.G * self.star.mass / (R**2)) * self.scale
+        accel = (self.G * self.star.mass / (R**2)) * self.speed_scale
 
         # Update velocity
         new_vx = self.velocity[0] + math.cos(theta) * accel
