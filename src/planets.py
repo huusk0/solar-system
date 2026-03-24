@@ -11,7 +11,10 @@ merkurius_distance = 10
 venus_dist = 18.6
 earth_dist = 25.8
 mars_dist = 39.3
-
+jupiter_dist = 134.4
+saturn_dist = 246.5
+uranus_dist = 495.6
+neptune_dist = 776.7
 planets = [
     Planet(
         mass=10,
@@ -52,5 +55,45 @@ planets = [
         speed_scale=SPEED_SCALE,
         G=G,
         color=(193, 68, 14),
+    ),
+    Planet(
+        mass=3178,  # Jupiter is ~318x Earth mass
+        coords=(200, int(sun.coords[1] - jupiter_dist)),
+        star=sun,
+        velocity=(math.sqrt(G * M * SPEED_SCALE / jupiter_dist), 0),
+        id="Jupiter",
+        speed_scale=SPEED_SCALE,
+        G=G,
+        color=(216, 202, 157),
+    ),
+    Planet(
+        mass=951,
+        coords=(200, int(sun.coords[1] - saturn_dist)),
+        star=sun,
+        velocity=(math.sqrt(G * M * SPEED_SCALE / saturn_dist), 0),
+        id="Saturn",
+        speed_scale=SPEED_SCALE,
+        G=G,
+        color=(225, 198, 110),
+    ),
+    Planet(
+        mass=145,
+        coords=(200, int(sun.coords[1] - uranus_dist)),
+        star=sun,
+        velocity=(math.sqrt(G * M * SPEED_SCALE / uranus_dist), 0),
+        id="Uranus",
+        speed_scale=SPEED_SCALE,
+        G=G,
+        color=(209, 231, 231),
+    ),
+    Planet(
+        mass=171,
+        coords=(200, int(sun.coords[1] - neptune_dist)),
+        star=sun,
+        velocity=(math.sqrt(G * M * SPEED_SCALE / neptune_dist), 0),
+        id="Neptune",
+        speed_scale=SPEED_SCALE,
+        G=G,
+        color=(63, 115, 255),
     ),
 ]
