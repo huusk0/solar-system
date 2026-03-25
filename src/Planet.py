@@ -55,17 +55,17 @@ class Planet:
         dy = self.star.coords[1] - self.coords[1]
 
         # R is the distance
-        R = math.sqrt(dx**2 + dy**2)
+        R_2 = dx**2 + dy**2
 
         # Avoid division by zero if planet is inside the star
-        if R < 1:
-            R = 1
+        if R_2 < 1:
+            R_2 = 1
 
         # atan2(y, x) handles all quadrants and dx=0 cases
         theta = math.atan2(dy, dx)
 
         # Gravity formula: GM / R^2
-        accel = (self.G * self.star.mass / (R**2)) * self.speed_scale
+        accel = (self.G * self.star.mass / (R_2)) * self.speed_scale
 
         # Update velocity
         new_vx = self.velocity[0] + math.cos(theta) * accel
