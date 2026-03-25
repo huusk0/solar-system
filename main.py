@@ -204,7 +204,7 @@ while running:
     #     print("###########")
     #     ticks = 0
     # Cap frame rate
-    clock.tick(6000)
+    clock.tick(10)
 
     # sorted_dist_list = sorted(
     #     min_dist_planet_pairs.items(), key=lambda x: x[1], reverse=True
