@@ -54,6 +54,8 @@ quit_rect = pygame.Rect(250, 350, 100, 30)
 sun = Sun(2000, (200, 200))
 
 planets = premade_planets
+inner_planets = set(planets[:4])
+outer_planets = set(planets[4:])
 # Main loop
 running = True
 screen.fill(black)
@@ -140,7 +142,7 @@ while running:
                 # Figure 2 most closest neighbor
                 pos_j2_temp = planet.get_closest_neighbor()
 
-                if i < 4:
+                if pos_j2_temp in inner_planets:
                     pos_j2 = (
                         int(start_coords[pos_j2_temp][0] + 400),
                         int(start_coords[pos_j2_temp][1]),
@@ -182,7 +184,7 @@ while running:
                 k: v - max_planet for k, v in planet.closest_neighbor_counts.items()
             }
             planets_text = font.render(
-                f"{planet}{p_map}",
+                f"{planet} => {p_map}",
                 True,
                 white,
             )
@@ -202,7 +204,7 @@ while running:
     #     print("###########")
     #     ticks = 0
     # Cap frame rate
-    clock.tick(600)
+    clock.tick(6000)
 
     # sorted_dist_list = sorted(
     #     min_dist_planet_pairs.items(), key=lambda x: x[1], reverse=True
