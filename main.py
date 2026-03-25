@@ -87,8 +87,9 @@ while running:
     pygame.draw.circle(screen, (100, 100, 100), sun2_coords, 50, width=2)
     # Update planet position if moving
     if moving:
-        for planet in planets:
-            planet.update_coords()
+        # Dont update planet positions since we randomize them on each tick
+        # for planet in planets:
+        #     planet.update_coords()
         for i, planet in enumerate(planets):
             # 1. Draw the planet (ensure coords are ints)
             if i < 4:
@@ -171,6 +172,7 @@ while running:
     screen.blit(start_text, (start_rect.x + 10, start_rect.y + 5))
     screen.blit(quit_text, (quit_rect.x + 10, quit_rect.y + 5))
 
+    # Draw each planets neighborlist into the GUI
     if moving:
         for i, planet in enumerate(planets):
             max_planet = max(planet.closest_neighbor_counts.values())
@@ -185,6 +187,9 @@ while running:
                 white,
             )
             screen.blit(planets_text, (10, 400 + 20 * i))
+        tick_text = font.render(f"tick: {ticks}", True, white)
+        screen.blit(tick_text, (10, 400 + 20 * (i + 1)))
+
     # Update display
     pygame.display.flip()
     ticks += 1
