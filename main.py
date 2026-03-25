@@ -157,13 +157,6 @@ while running:
                     )
                     pygame.draw.line(screen, green, pos_i2, pos_j2, 1)
 
-                if (planet, min_planet) in min_dist_planet_pairs:
-                    min_dist_planet_pairs[(planet, min_planet)] += 1
-                elif (min_planet, planet) in min_dist_planet_pairs:
-                    min_dist_planet_pairs[(min_planet, planet)] += 1
-                else:
-                    min_dist_planet_pairs[(planet, min_planet)] = 1
-
     # Draw buttons
     pygame.draw.rect(screen, white, start_rect, 2)
     pygame.draw.rect(screen, white, quit_rect, 2)
@@ -205,13 +198,6 @@ while running:
     #     ticks = 0
     # Cap frame rate
     clock.tick(10)
-
-    # sorted_dist_list = sorted(
-    #     min_dist_planet_pairs.items(), key=lambda x: x[1], reverse=True
-    # )
-    # if len(sorted_dist_list) != 0:
-    #     print(sorted_dist_list)
-    # print(planets[0].closest_neightbor_counts)
 
 # Quit pygame
 pygame.quit()
