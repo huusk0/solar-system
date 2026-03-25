@@ -43,7 +43,7 @@ class Planet:
         else:
             self.closest_neighbor_counts[neighbor] = 1
 
-    def get_closest_neighbor_coords(self):
+    def get_closest_neighbor(self):
         # Function should not be called if there has not been neighbors added
         if len(self.closest_neighbor_counts) == 0:
             raise ValueError(f"Planet '{self.id}' has no recorded neighbors.")
@@ -51,7 +51,7 @@ class Planet:
             sorted_dist_list = sorted(
                 self.closest_neighbor_counts.items(), key=lambda x: x[1], reverse=True
             )
-            return sorted_dist_list[0][0].coords
+            return sorted_dist_list[0][0]
 
     def calculate_v(self):
         dx = self.star.coords[0] - self.coords[0]
