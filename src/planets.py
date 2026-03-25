@@ -2,7 +2,7 @@ from .Planet import Planet
 from .Sun import Sun
 import math
 
-SPEED_SCALE = 0.05
+SPEED_SCALE = 0.005
 G = 1
 M = 1000
 
@@ -28,9 +28,9 @@ planets = [
     ),
     Planet(
         mass=8.15,  # Relative to Mercury's mass scale
-        coords=(200, int(sun.coords[1] - venus_dist)),
+        coords=(200, int(sun.coords[1] + venus_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / venus_dist), 0),
+        velocity=(-math.sqrt(G * M * SPEED_SCALE / venus_dist), 0),
         id="Venus",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -48,9 +48,9 @@ planets = [
     ),
     Planet(
         mass=1.07,
-        coords=(200, int(sun.coords[1] - mars_dist)),
+        coords=(200, int(sun.coords[1] + mars_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / mars_dist), 0),
+        velocity=(-math.sqrt(G * M * SPEED_SCALE / mars_dist), 0),
         id="Mars",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -68,9 +68,9 @@ planets = [
     ),
     Planet(
         mass=951,
-        coords=(200, int(sun.coords[1] - saturn_dist)),
+        coords=(200, int(sun.coords[1] + saturn_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / saturn_dist), 0),
+        velocity=(-math.sqrt(G * M * SPEED_SCALE / saturn_dist), 0),
         id="Saturn",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -88,9 +88,9 @@ planets = [
     ),
     Planet(
         mass=171,
-        coords=(200, int(sun.coords[1] - neptune_dist)),
+        coords=(200, int(sun.coords[1] + neptune_dist)),
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / neptune_dist), 0),
+        velocity=(-math.sqrt(G * M * SPEED_SCALE / neptune_dist), 0),
         id="Neptune",
         speed_scale=SPEED_SCALE,
         G=G,
