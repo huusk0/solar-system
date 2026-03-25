@@ -27,6 +27,9 @@ class Planet:
     def __repr__(self) -> str:
         return f"Planet {self.id}"
 
+    def __hash__(self) -> int:
+        return hash(self.id)
+
     def update_coords(self):
         self.calculate_v()
         self.coords = (
@@ -61,14 +64,13 @@ class Planet:
         if R_2 < 1:
             R_2 = 1
 
-        # atan2(y, x) handles all quadrants and dx=0 cases
-        theta = math.atan2(dy, dx)
-
         # Gravity formula: GM / R^2
         accel = (self.G * self.star.mass / (R_2)) * self.speed_scale
 
-        # Update velocity
-        new_vx = self.velocity[0] + math.cos(theta) * accel
-        new_vy = self.velocity[1] + math.sin(theta) * accel
+        ax = dx / math.sqrt(R_2) * accel
+        ay = dy / math.sqrt(R_2) * accel
+
+        new_vx = self.velocity[0] + ax
+        new_vy = self.velocity[1] + ay
 
         self.velocity = (new_vx, new_vy)
