@@ -102,12 +102,12 @@ while running:
                 dy = (sun.coords[1] - planet.coords[1]) * 0.4
 
                 dx_s = (sun.coords[0] - start_coords[planet][0]) * 0.4
-                dx_y = (sun.coords[0] - start_coords[planet][1]) * 0.4
+                dy_s = (sun.coords[0] - start_coords[planet][1]) * 0.4
 
                 pos_i = (int(sun.coords[0] - dx), int(sun.coords[1] - dy))
                 pygame.draw.circle(screen, planet.color, pos_i, 2)
 
-                pos_i2 = (int(sun.coords[0] - dx_s) + 400, int(sun.coords[1] - dx_y))
+                pos_i2 = (int(sun.coords[0] - dx_s) + 400, int(sun.coords[1] - dy_s))
                 pygame.draw.circle(screen, planet.color, pos_i2, 2)
 
             min_dist_sq = float("inf")
@@ -138,11 +138,21 @@ while running:
 
                 # Figure 2 most closest neighbor
                 pos_j2_temp = planet.get_closest_neighbor()
-                pos_j2 = (
-                    int(start_coords[pos_j2_temp][0] + 400),
-                    int(start_coords[pos_j2_temp][1]),
-                )
-                pygame.draw.line(screen, green, pos_i2, pos_j2, 1)
+
+                if i < 4:
+                    pos_j2 = (
+                        int(start_coords[pos_j2_temp][0] + 400),
+                        int(start_coords[pos_j2_temp][1]),
+                    )
+                    pygame.draw.line(screen, green, pos_i2, pos_j2, 1)
+                else:
+                    dx_s = (sun.coords[0] - start_coords[pos_j2_temp][0]) * 0.4
+                    dy_s = (sun.coords[0] - start_coords[pos_j2_temp][1]) * 0.4
+                    pos_j2 = (
+                        int(sun.coords[0] - dx_s) + 400,
+                        int(sun.coords[1] - dy_s),
+                    )
+                    pygame.draw.line(screen, green, pos_i2, pos_j2, 1)
 
                 if (planet, min_planet) in min_dist_planet_pairs:
                     min_dist_planet_pairs[(planet, min_planet)] += 1
