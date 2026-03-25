@@ -1,5 +1,5 @@
-from .Planet import Planet
-from .Sun import Sun
+from .planet import Planet
+from .sun import Sun
 import math
 import random  # Added for randomness
 

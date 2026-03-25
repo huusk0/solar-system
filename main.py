@@ -1,7 +1,7 @@
 import pygame
 import math
 from src.planets import planets as premade_planets
-from src.Sun import Sun
+from src.sun import Sun
 import random
 
 
@@ -121,7 +121,6 @@ while running:
                 if i == j:
                     continue
 
-                # Use squared distance to avoid expensive math.sqrt()
                 dx = planet.coords[0] - neighbor.coords[0]
                 dy = planet.coords[1] - neighbor.coords[1]
                 dist_sq = dx**2 + dy**2
@@ -130,7 +129,7 @@ while running:
                     min_dist_sq = dist_sq
                     min_planet = neighbor
 
-            # 3. Draw the line
+            # 3. Draw the line & Update neighbors
             if min_planet:
                 # # Figure 1 closest neighbor atm
                 # pos_j = (int(min_planet.coords[0]), int(min_planet.coords[1]))
@@ -172,7 +171,6 @@ while running:
         for i, planet in enumerate(planets):
             max_planet = max(planet.closest_neighbor_counts.values())
             p_list = [i - max_planet for i in planet.closest_neighbor_counts.values()]
-            # The standard Pythonic way for dictionaries
             p_map = {
                 k: v - max_planet for k, v in planet.closest_neighbor_counts.items()
             }
