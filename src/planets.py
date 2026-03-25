@@ -1,6 +1,7 @@
 from .Planet import Planet
 from .Sun import Sun
 import math
+import random  # Added for randomness
 
 SPEED_SCALE = 0.005
 G = 1
@@ -15,22 +16,74 @@ jupiter_dist = 134.4
 saturn_dist = 246.5
 uranus_dist = 495.6
 neptune_dist = 776.7
+
+
+# Helper function to generate random starting position and velocity
+def random_planet_setup(distance, sun_coords, g, m, speed_scale):
+    # 1. Keep x and y as ints as requested
+    angle = random.uniform(0, 2 * math.pi)
+    x = int(sun_coords[0] + distance * math.cos(angle))
+    y = int(sun_coords[1] + distance * math.sin(angle))
+    coords = (x, y)
+
+    # 2. Calculate actual distance from the resulting ints
+    dx = x - sun_coords[0]
+    dy = y - sun_coords[1]
+    dist = math.sqrt(dx**2 + dy**2)
+
+    # 3. Corrected Tangential Velocity
+    # mag must be (sqrt(GM/r) * speed_scale) to match your accel scaling
+    mag = math.sqrt((g * m * SPEED_SCALE) / dist)
+
+    # Perpendicular vector to (dx, dy) is (-dy, dx)
+    vx = -dy / dist * mag
+    vy = dx / dist * mag
+    velocity = (vx, vy)
+
+    return coords, velocity
+
+
+merkurius_coords, merkurius_velocity = random_planet_setup(
+    merkurius_distance, sun.coords, G, M, SPEED_SCALE
+)
+venus_coords, venus_velocity = random_planet_setup(
+    venus_dist, sun.coords, G, M, SPEED_SCALE
+)
+earth_coords, earth_velocity = random_planet_setup(
+    earth_dist, sun.coords, G, M, SPEED_SCALE
+)
+mars_coords, mars_velocity = random_planet_setup(
+    mars_dist, sun.coords, G, M, SPEED_SCALE
+)
+jupiter_coords, jupiter_velocity = random_planet_setup(
+    jupiter_dist, sun.coords, G, M, SPEED_SCALE
+)
+saturn_coords, saturn_velocity = random_planet_setup(
+    saturn_dist, sun.coords, G, M, SPEED_SCALE
+)
+uranus_coords, uranus_velocity = random_planet_setup(
+    uranus_dist, sun.coords, G, M, SPEED_SCALE
+)
+neptune_coords, neptune_velocity = random_planet_setup(
+    neptune_dist, sun.coords, G, M, SPEED_SCALE
+)
+
 planets = [
     Planet(
         mass=10,
-        coords=(200, sun.coords[1] - merkurius_distance),
+        coords=merkurius_coords,
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / (merkurius_distance)), 0),
+        velocity=merkurius_velocity,
         id="Mercury",
         speed_scale=SPEED_SCALE,
         G=G,
         color=(100, 100, 100),
     ),
     Planet(
-        mass=8.15,  # Relative to Mercury's mass scale
-        coords=(200, int(sun.coords[1] + venus_dist)),
+        mass=8.15,
+        coords=venus_coords,
         star=sun,
-        velocity=(-math.sqrt(G * M * SPEED_SCALE / venus_dist), 0),
+        velocity=venus_velocity,
         id="Venus",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -38,9 +91,9 @@ planets = [
     ),
     Planet(
         mass=10.0,
-        coords=(200, int(sun.coords[1] - earth_dist)),
+        coords=earth_coords,
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / earth_dist), 0),
+        velocity=earth_velocity,
         id="Earth",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -48,19 +101,19 @@ planets = [
     ),
     Planet(
         mass=1.07,
-        coords=(200, int(sun.coords[1] + mars_dist)),
+        coords=mars_coords,
         star=sun,
-        velocity=(-math.sqrt(G * M * SPEED_SCALE / mars_dist), 0),
+        velocity=mars_velocity,
         id="Mars",
         speed_scale=SPEED_SCALE,
         G=G,
         color=(193, 68, 14),
     ),
     Planet(
-        mass=3178,  # Jupiter is ~318x Earth mass
-        coords=(200, int(sun.coords[1] - jupiter_dist)),
+        mass=3178,
+        coords=jupiter_coords,
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / jupiter_dist), 0),
+        velocity=jupiter_velocity,
         id="Jupiter",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -68,9 +121,9 @@ planets = [
     ),
     Planet(
         mass=951,
-        coords=(200, int(sun.coords[1] + saturn_dist)),
+        coords=saturn_coords,
         star=sun,
-        velocity=(-math.sqrt(G * M * SPEED_SCALE / saturn_dist), 0),
+        velocity=saturn_velocity,
         id="Saturn",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -78,9 +131,9 @@ planets = [
     ),
     Planet(
         mass=145,
-        coords=(200, int(sun.coords[1] - uranus_dist)),
+        coords=uranus_coords,
         star=sun,
-        velocity=(math.sqrt(G * M * SPEED_SCALE / uranus_dist), 0),
+        velocity=uranus_velocity,
         id="Uranus",
         speed_scale=SPEED_SCALE,
         G=G,
@@ -88,9 +141,9 @@ planets = [
     ),
     Planet(
         mass=171,
-        coords=(200, int(sun.coords[1] + neptune_dist)),
+        coords=neptune_coords,
         star=sun,
-        velocity=(-math.sqrt(G * M * SPEED_SCALE / neptune_dist), 0),
+        velocity=neptune_velocity,
         id="Neptune",
         speed_scale=SPEED_SCALE,
         G=G,
